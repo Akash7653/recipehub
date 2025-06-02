@@ -35,7 +35,7 @@ function Navbar() {
           </span>
         </a>
         <button
-          className="navbar-toggler animate__animated animate__pulse animate__infinite"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -46,33 +46,39 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <div className="navbar-nav ms-auto align-items-center">
+          <ul className="navbar-nav ms-auto align-items-center">
             {currentUser ? (
               <>
-                <a
-                  className={`nav-link mx-2 fs-5 ${
-                    theme === 'light' ? 'text-white' : 'text-light'
-                  } nav-item-hover animate__animated animate__bounceIn`}
-                  href="/dashboard"
-                >
-                  Dashboard
-                </a>
-                <a
-                  className={`nav-link mx-2 fs-5 ${
-                    theme === 'light' ? 'text-white' : 'text-light'
-                  } nav-item-hover animate__animated animate__bounceIn animate__delay-1s`}
-                  href="/recipe/new"
-                >
-                  New Recipe
-                </a>
-                <span
-                  className={`nav-item mx-2 fs-6 ${
-                    theme === 'light' ? 'text-light-muted' : 'text-accent-light'
-                  } animate__animated animate__pulse animate__infinite`}
-                >
-                  {currentTime}
-                </span>
-                <div className="dropdown mx-2">
+                <li className="nav-item">
+                  <a
+                    className={`nav-link mx-2 fs-5 ${
+                      theme === 'light' ? 'text-white' : 'text-light'
+                    } nav-item-hover`}
+                    href="/dashboard"
+                  >
+                    Dashboard
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link mx-2 fs-5 ${
+                      theme === 'light' ? 'text-white' : 'text-light'
+                    } nav-item-hover`}
+                    href="/recipe/new"
+                  >
+                    New Recipe
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <span
+                    className={`nav-link mx-2 fs-6 ${
+                      theme === 'light' ? 'text-light-muted' : 'text-accent-light'
+                    }`}
+                  >
+                    {currentTime}
+                  </span>
+                </li>
+                <li className="nav-item dropdown mx-2">
                   <button
                     className={`btn ${
                       theme === 'light' ? 'btn-outline-accent' : 'btn-outline-accent-dark'
@@ -97,39 +103,45 @@ function Navbar() {
                       </button>
                     </li>
                   </ul>
-                </div>
+                </li>
               </>
             ) : (
               <>
-                <a
-                  className={`nav-link mx-2 fs-5 ${
-                    theme === 'light' ? 'text-white' : 'text-light'
-                  } nav-item-hover animate__animated animate__bounceIn`}
-                  href="/login"
-                >
-                  Login
-                </a>
-                <a
-                  className={`nav-link mx-2 fs-5 ${
-                    theme === 'light' ? 'text-white' : 'text-light'
-                  } nav-item-hover animate__animated animate__bounceIn animate__delay-1s`}
-                  href="/register"
-                >
-                  Register
-                </a>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link mx-2 fs-5 ${
+                      theme === 'light' ? 'text-white' : 'text-light'
+                    } nav-item-hover`}
+                    href="/login"
+                  >
+                    Login
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link mx-2 fs-5 ${
+                      theme === 'light' ? 'text-white' : 'text-light'
+                    } nav-item-hover`}
+                    href="/register"
+                  >
+                    Register
+                  </a>
+                </li>
               </>
             )}
-            <button
-              className={`btn ${
-                theme === 'light' ? 'btn-outline-accent' : 'btn-outline-accent-dark'
-              } ms-2 fs-6 theme-toggle animate__animated animate__rotateIn`}
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-            >
-              <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'} me-1`}></i>
-              {theme === 'light' ? 'Dark' : 'Light'}
-            </button>
-          </div>
+            <li className="nav-item">
+              <button
+                className={`btn ${
+                  theme === 'light' ? 'btn-outline-accent' : 'btn-outline-accent-dark'
+                } ms-2 fs-6 theme-toggle`}
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+              >
+                <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'} me-1`}></i>
+                {theme === 'light' ? 'Dark' : 'Light'}
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
