@@ -1,0 +1,11 @@
+body {
+  font-family: 'Arial', sans-serif; /* Replace with Figma font */
+}
+.btn-primary {
+  background-color: #007bff; /* Replace with Figma primary color */
+  border-color: #007bff;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
