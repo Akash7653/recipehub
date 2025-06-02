@@ -34,26 +34,26 @@ function Dashboard() {
   return (
     <div>
       <Navbar />
-      <div className="container mt-5">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h1 className="display-4">RecipeHub Dashboard</h1>
-          <button className="btn btn-outline-danger" onClick={handleLogout}>Logout</button>
+      <div className="container mt-5 px-3">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+          <h1 className="display-4 fs-2">RecipeHub Dashboard</h1>
+          <button className="btn btn-outline-danger mt-2 mt-md-0" onClick={handleLogout}>Logout</button>
         </div>
-        <button className="btn btn-primary mb-4" onClick={() => navigate('/recipe/new')}>
+        <button className="btn btn-primary mb-4 w-100 w-md-auto" onClick={() => navigate('/recipe/new')}>
           Create New Recipe
         </button>
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
           {recipes.length === 0 ? (
-            <p className="text-muted">No recipes yet. Create one!</p>
+            <p className="text-muted fs-5">No recipes yet. Create one!</p>
           ) : (
             recipes.map(recipe => (
-              <div key={recipe.id} className="col-md-4 mb-3">
-                <div className="card shadow-sm rounded">
+              <div key={recipe.id} className="col">
+                <div className="card shadow-sm rounded h-100">
                   <div className="card-body">
-                    <h5 className="card-title">{recipe.title}</h5>
+                    <h5 className="card-title fs-5">{recipe.title}</h5>
                     <p className="card-text text-muted">{recipe.description}</p>
                     <button
-                      className="btn btn-outline-primary"
+                      className="btn btn-outline-primary w-100"
                       onClick={() => navigate(`/recipe/${recipe.id}`)}
                     >
                       View

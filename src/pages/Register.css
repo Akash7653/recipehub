@@ -1,0 +1,79 @@
+.register-page {
+  transition: background-color 0.3s ease;
+}
+
+.register-card {
+  background-color: var(--card-bg, #fff);
+  color: var(--card-color, #212529);
+  border: none;
+  transition: transform 0.3s ease-in-out, background-color 0.3s, color 0.3s;
+}
+
+.register-card:hover {
+  transform: translateY(-5px);
+}
+
+.register-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.btn-accent {
+  background-color: var(--accent-color, #ff6f61);
+  border-color: var(--accent-color, #ff6f61);
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-accent:hover {
+  background-color: #e65a50;
+  border-color: #e65a50;
+}
+
+.btn-accent-dark {
+  background-color: var(--accent-color, #28a745);
+  border-color: var(--accent-color, #28a745);
+  color: #12191f;
+  font-weight: 500;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-accent-dark:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+.text-accent {
+  color: var(--accent-color, #ff6f61) !important;
+  transition: color 0.3s ease;
+}
+
+body.dark .text-accent {
+  color: var(--accent-color, #28a745) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .register-card {
+    padding: 1.5rem !important;
+  }
+
+  .register-title {
+    font-size: 1.5rem;
+  }
+
+  .btn-accent,
+  .btn-accent-dark {
+    font-size: 1rem;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+  }
+}
