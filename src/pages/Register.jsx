@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
@@ -10,6 +10,8 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const { register } = useAuth();
 
@@ -17,24 +19,31 @@ function Register() {
     e.preventDefault();
     setError('');
 
+    if (!name.trim()) {
+      setError('Name cannot be empty.');
+      return;
+    }
+
     if (password.length < 6) {
-      setError('Password must be at least 6 characters long.');
+      // Prevent submission if password is too short, no need for error here as live message shows
       return;
     }
 
     try {
+      setLoading(true);
       await register(name, email, password);
       navigate('/login');
-    } catch (err) {
+    } catch {
       setError('Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div
       style={{
-        backgroundImage:
-          "url('https://img.freepik.com/free-photo/twig-leaves-around-notepad_23-2147931872.jpg')",
+        backgroundImage: "url('https://img.freepik.com/free-photo/twig-leaves-around-notepad_23-2147931872.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
@@ -59,10 +68,7 @@ function Register() {
                 src="https://img.freepik.com/premium-photo/healthy-food-by-color-2019-yogurt-breakfast-bowl-with-copy-space_42124-763.jpg"
                 alt="Register Visual"
                 className="img-fluid h-100 w-100 rounded-4 object-fit-cover"
-                style={{
-                  borderTopRightRadius: '0.75rem',
-                  borderBottomRightRadius: '0.75rem',
-                }}
+                style={{ borderTopRightRadius: '0.75rem', borderBottomRightRadius: '0.75rem' }}
               />
             </div>
 
@@ -118,23 +124,19 @@ function Register() {
                       required
                     />
                   </div>
-                  <small className="text-warning">
-                    Password must be at least 6 characters.
-                  </small>
+                  {password && password.length < 6 && (
+                    <small className="text-warning">Password must be at least 6 characters.</small>
+                  )}
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-success w-100 mt-3 fw-bold"
-                  disabled={password.length < 6}
-                >
-                  Register
+                <button type="submit" className="btn btn-success w-100 mt-3 fw-bold" disabled={loading}>
+                  {loading ? 'Registering...' : 'Register'}
                 </button>
               </form>
               <p className="mt-3 text-center text-light">
                 Already have an account?{' '}
-                <a href="/login" className="text-warning fw-semibold">
+                <Link to="/login" className="text-warning fw-semibold">
                   Login
-                </a>
+                </Link>
               </p>
             </div>
           </div>

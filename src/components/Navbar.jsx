@@ -33,7 +33,7 @@ function Navbar() {
       } shadow-lg px-4`}
     >
       <div className="container-fluid">
-        <Link className="navbar-brand d-flex align-items-center" to="/dashboard">
+        <Link className="navbar-brand d-flex align-items-center" to="/">
           <i className="fas fa-utensils me-2 text-warning fs-4"></i>
           <span className="fw-bold fs-4">RecipeHub</span>
         </Link>
