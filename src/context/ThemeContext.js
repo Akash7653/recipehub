@@ -1,3 +1,4 @@
+// src/context/ThemeContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
@@ -6,12 +7,12 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
-    document.body.className = theme;
     localStorage.setItem('theme', theme);
+    document.body.className = theme;
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -21,6 +22,4 @@ export function ThemeProvider({ children }) {
   );
 }
 
-export function useTheme() {
-  return useContext(ThemeContext);
-}
+export const useTheme = () => useContext(ThemeContext);

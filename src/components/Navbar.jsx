@@ -46,7 +46,7 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto align-items-center">
+          <ul className="navbar-nav align-items-center">
             {currentUser ? (
               <>
                 <li className="nav-item">
@@ -129,17 +129,14 @@ function Navbar() {
                 </li>
               </>
             )}
-            <li className="nav-item">
-              <button
-                className={`btn ${
-                  theme === 'light' ? 'btn-outline-accent' : 'btn-outline-accent-dark'
-                } ms-2 fs-6 theme-toggle`}
+            <li className="nav-item ms-auto">
+              <img
+                src={theme === 'light' ? 'https://cdn-icons-png.flaticon.com/512/869/869869.png' : 'https://cdn-icons-png.flaticon.com/512/547/547433.png'}
+                alt={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                className="theme-toggle-img"
                 onClick={toggleTheme}
-                aria-label="Toggle theme"
-              >
-                <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'} me-1`}></i>
-                {theme === 'light' ? 'Dark' : 'Light'}
-              </button>
+                style={{ width: '30px', height: '30px', cursor: 'pointer' }}
+              />
             </li>
           </ul>
         </div>
