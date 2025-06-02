@@ -16,6 +16,12 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
     try {
       await register(name, email, password);
       navigate('/login');
@@ -25,33 +31,42 @@ function Register() {
   };
 
   return (
-    <div style={{
-      backgroundImage: "url('https://img.freepik.com/free-photo/twig-leaves-around-notepad_23-2147931872.jpg?uid=R136247762&ga=GA1.1.269963768.1747223629&semt=ais_hybrid&w=740')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      minHeight: '100vh',
-      fontFamily: "'Poppins', sans-serif"
-    }}>
+    <div
+      style={{
+        backgroundImage:
+          "url('https://img.freepik.com/free-photo/twig-leaves-around-notepad_23-2147931872.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        fontFamily: "'Poppins', sans-serif",
+      }}
+    >
       <Navbar />
       <div className="container d-flex align-items-center justify-content-center py-5">
-        <div className="card shadow-lg border-0 rounded-4 p-4 mt-5" style={{
-          backdropFilter: 'blur(15px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-          maxWidth: '900px',
-          width: '100%'
-        }}>
+        <div
+          className="card shadow-lg border-0 rounded-4 p-4 mt-5"
+          style={{
+            backdropFilter: 'blur(15px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+            maxWidth: '900px',
+            width: '100%',
+          }}
+        >
           <div className="row g-0">
-            {/* Image */}
+            {/* Image Section */}
             <div className="col-md-6 d-none d-md-block">
               <img
-                src="https://img.freepik.com/premium-photo/healthy-food-by-color-2019-yogurt-breakfast-bowl-with-copy-space_42124-763.jpg?uid=R136247762&ga=GA1.1.269963768.1747223629&semt=ais_hybrid&w=740"
+                src="https://img.freepik.com/premium-photo/healthy-food-by-color-2019-yogurt-breakfast-bowl-with-copy-space_42124-763.jpg"
                 alt="Register Visual"
                 className="img-fluid h-100 w-100 rounded-4 object-fit-cover"
-                style={{ borderTopRightRadius: '0.75rem', borderBottomRightRadius: '0.75rem' }}
+                style={{
+                  borderTopRightRadius: '0.75rem',
+                  borderBottomRightRadius: '0.75rem',
+                }}
               />
             </div>
 
-            {/* Form */}
+            {/* Register Form */}
             <div className="col-md-6 px-4 py-3 text-white">
               <h2 className="mb-4 text-center fw-bold">Create Account</h2>
               {error && <div className="alert alert-danger">{error}</div>}
@@ -59,7 +74,9 @@ function Register() {
                 <div className="mb-3">
                   <label className="form-label">Name</label>
                   <div className="input-group">
-                    <span className="input-group-text"><FaUser /></span>
+                    <span className="input-group-text">
+                      <FaUser />
+                    </span>
                     <input
                       type="text"
                       className="form-control"
@@ -73,7 +90,9 @@ function Register() {
                 <div className="mb-3">
                   <label className="form-label">Email</label>
                   <div className="input-group">
-                    <span className="input-group-text"><FaEnvelope /></span>
+                    <span className="input-group-text">
+                      <FaEnvelope />
+                    </span>
                     <input
                       type="email"
                       className="form-control"
@@ -87,7 +106,9 @@ function Register() {
                 <div className="mb-3">
                   <label className="form-label">Password</label>
                   <div className="input-group">
-                    <span className="input-group-text"><FaLock /></span>
+                    <span className="input-group-text">
+                      <FaLock />
+                    </span>
                     <input
                       type="password"
                       className="form-control"
@@ -97,13 +118,23 @@ function Register() {
                       required
                     />
                   </div>
+                  <small className="text-warning">
+                    Password must be at least 6 characters.
+                  </small>
                 </div>
-                <button type="submit" className="btn btn-success w-100 mt-3 fw-bold">
+                <button
+                  type="submit"
+                  className="btn btn-success w-100 mt-3 fw-bold"
+                  disabled={password.length < 6}
+                >
                   Register
                 </button>
               </form>
               <p className="mt-3 text-center text-light">
-                Already have an account? <a href="/login" className="text-warning fw-semibold">Login</a>
+                Already have an account?{' '}
+                <a href="/login" className="text-warning fw-semibold">
+                  Login
+                </a>
               </p>
             </div>
           </div>
