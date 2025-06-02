@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Navbar() {
   const { currentUser, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,68 +22,51 @@ function Navbar() {
     navigate('/login');
   };
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav
       className={`navbar navbar-expand-lg ${
-        theme === 'light' ? 'navbar-light bg-gradient-light' : 'navbar-dark bg-gradient-dark'
-      } shadow-lg animate__animated animate__fadeInDown`}
+        theme === 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark'
+      } shadow-lg px-4`}
     >
-      <div className="container-fluid px-4">
-        <a className="navbar-brand d-flex align-items-center" href="/dashboard">
-          <i className="fas fa-utensils me-2 text-accent fs-4"></i>
-          <span className={`fw-bold fs-4 ${theme === 'light' ? 'text-white' : 'text-accent'}`}>
-            RecipeHub
-          </span>
-        </a>
+      <div className="container-fluid">
+        <Link className="navbar-brand d-flex align-items-center" to="/dashboard">
+          <i className="fas fa-utensils me-2 text-warning fs-4"></i>
+          <span className="fw-bold fs-4">RecipeHub</span>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
+          onClick={handleToggle}
           aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded={isOpen}
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav align-items-center">
+        <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
+          <ul className="navbar-nav ms-auto align-items-center gap-3">
             {currentUser ? (
               <>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link mx-2 fs-5 ${
-                      theme === 'light' ? 'text-white' : 'text-light'
-                    } nav-item-hover`}
-                    href="/dashboard"
-                  >
+                  <Link className="nav-link fs-5" to="/dashboard">
                     Dashboard
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link mx-2 fs-5 ${
-                      theme === 'light' ? 'text-white' : 'text-light'
-                    } nav-item-hover`}
-                    href="/recipe/new"
-                  >
+                  <Link className="nav-link fs-5" to="/recipe/new">
                     New Recipe
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <span
-                    className={`nav-link mx-2 fs-6 ${
-                      theme === 'light' ? 'text-light-muted' : 'text-accent-light'
-                    }`}
-                  >
-                    {currentTime}
-                  </span>
+                  <span className="nav-link fs-6 text-muted">{currentTime}</span>
                 </li>
-                <li className="nav-item dropdown mx-2">
+                <li className="nav-item dropdown">
                   <button
-                    className={`btn ${
-                      theme === 'light' ? 'btn-outline-accent' : 'btn-outline-accent-dark'
-                    } dropdown-toggle fs-6`}
+                    className="btn btn-outline-warning dropdown-toggle fs-6"
                     type="button"
                     id="profileDropdown"
                     data-bs-toggle="dropdown"
@@ -93,9 +77,9 @@ function Navbar() {
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="profileDropdown">
                     <li>
-                      <a className="dropdown-item" href="/profile">
+                      <Link className="dropdown-item" to="/profile">
                         Profile
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <button className="dropdown-item" onClick={handleLogout}>
@@ -108,34 +92,34 @@ function Navbar() {
             ) : (
               <>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link mx-2 fs-5 ${
-                      theme === 'light' ? 'text-white' : 'text-light'
-                    } nav-item-hover`}
-                    href="/login"
+                  <Link
+                    className={`nav-link fs-6 ${theme === 'dark' ? 'text-white' : 'text-dark'}`}
+                    to="/login"
                   >
                     Login
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link mx-2 fs-5 ${
-                      theme === 'light' ? 'text-white' : 'text-light'
-                    } nav-item-hover`}
-                    href="/register"
-                  >
+                  <Link className="nav-link fs-6" to="/register">
                     Register
-                  </a>
+                  </Link>
                 </li>
               </>
             )}
-            <li className="nav-item ms-auto">
+            <li className="nav-item ms-3">
               <img
-                src={theme === 'light' ? 'https://cdn-icons-png.flaticon.com/512/869/869869.png' : 'https://cdn-icons-png.flaticon.com/512/547/547433.png'}
-                alt={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-                className="theme-toggle-img"
+                src={
+                  theme === 'dark'
+                    ? 'https://cdn-icons-png.flaticon.com/512/5260/5260711.png'
+                    : 'https://cdn-icons-png.flaticon.com/512/5260/5260705.png'
+                }
+                alt="Toggle theme"
                 onClick={toggleTheme}
-                style={{ width: '30px', height: '30px', cursor: 'pointer' }}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  cursor: 'pointer',
+                }}
               />
             </li>
           </ul>

@@ -154,7 +154,7 @@ body.dark .dropdown-item {
 
 /* Navbar Collapse for Mobile */
 .navbar-collapse {
-  transition: all 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
 }
 
 .navbar-nav {
@@ -216,9 +216,13 @@ body.dark .dropdown-item {
 }
 
 @media (max-width: 991.98px) {
+  .navbar-collapse {
+    display: none;
+  }
+
   .navbar-collapse.show,
   .navbar-collapse.collapsing {
-    display: block !important;
+    display: block;
     background: var(--nav-bg);
     padding: 1rem;
     border-radius: 0 0 8px 8px;
